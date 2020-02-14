@@ -1,13 +1,5 @@
-# flexy205-azure
+# Send data from an Ewon Flexy to Microsoft Azure IoT Hub
 Getting started guide for Ewon Flexy with Microsoft Azure IoT Hub (via MQTT)
-
----
-platform: {HMS Ewon}
-device: {Flexy}
-language: BASIC scripting
----
-
-Run a simple C sample on {enter your device name here} device running {enter the OS name running on device}
 ===
 ---
 
@@ -20,29 +12,24 @@ Run a simple C sample on {enter your device name here} device running {enter the
 -   [Tips](#tips)
 -   [Next Steps](#NextSteps)
 
-# Instructions for using this template
-
--   Replace the text in {placeholders} with correct values.
--   Delete the lines {{enclosed}} after following the instructions enclosed between them.
--   It is advisable to use external links, wherever possible.
--   Remove this section from final document.
-
 <a name="Introduction"></a>
 # Introduction
 
 **About this document**
 
-This document describes how to connect {enter your device name here} device running {enter the OS name running on device} with Azure IoT SDK. This multi-step process includes:
+This document describes how to connect an Ewon Flexy device to Microsoft Azure IoT Hub. This multi-step process includes:
 -   Configuring Azure IoT Hub
--   Registering your IoT device
--   Build and deploy Azure IoT SDK on device
+-   Configuring an Ewon Flexy
+-   Testing the MQTT connection with Device Explorer
 
 <a name="Prerequisites"></a>
 # Step 1: Prerequisites
 
 You should have the following items ready before beginning the process:
 
--   [Prepare your development environment][setup-devbox-linux]
+-   Ewon Flexy device, minimum FW 14.0s0
+-   Microsoft Device Explorer
+[Prepare your development environment][setup-devbox-linux]
 -   [Setup your IoT hub][lnk-setup-iot-hub]
 -   [Provision your device and get its credentials][lnk-manage-iot-hub]
 -   {enter your device name here} device.
