@@ -53,15 +53,15 @@ Next we're going to COLLECT CONNECTIVITY PARAMETERS
 12. Under “Settings”, click “Shared Access Policies”
 13. Click “iothubowner”
 14. Next to “Connection String - primary key” click the “copy to clipboard” icon and save this string in a safe place. 
-  - Your string should look something like: HostName=FlexyStepByStepGuide.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=blahblahblahblahblahblah= 
+    - Your string should look something like: HostName=FlexyStepByStepGuide.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=blahblahblahblahblahblah= 
 
 That’s all we need from Azure! Let’s generate your SAS Token.
 
 15. Open up Device Explorer and paste your Connection String, click Update, then click Generate SAS.
 16. The three key pieces of information we need to keep handy are:
-  - Device Name (also known as DeviceId)
-  - Host Name (also known as IoTHubName)
-  - SAS Token (what we just generated in Step 9)
+    - Device Name (also known as DeviceId)
+    - Host Name (also known as IoTHubName)
+    - SAS Token (what we just generated in Step 9)
 
 
 <a name="Flexy"></a>
@@ -69,17 +69,17 @@ That’s all we need from Azure! Let’s generate your SAS Token.
 For this section, we are going to follow the recommendations given by Microsoft here: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-mqtt-support#using-the-mqtt-protocol-directly-as-a-device
 
 1. Load the DigiCert Baltimore PEM certificate on to your Flexy via FTP into the /usr folder
-  - If you have questions on this step, please refer to Step 1 in the following knowledge-base article: https://hmsnetworks.blob.core.windows.net/www/docs/librariesprovider10/downloads-monitored/manuals/knowledge-base/kb-0020-00-en-configure-your-ewon-using-ftp.pdf?sfvrsn=32ef56d7_6
+    - If you have questions on this step, please refer to Step 1 in the following knowledge-base article: https://hmsnetworks.blob.core.windows.net/www/docs/librariesprovider10/downloads-monitored/manuals/knowledge-base/kb-0020-00-en-configure-your-ewon-using-ftp.pdf?sfvrsn=32ef56d7_6
 2. Log in to your Flexy device and ensure that you have at least one (1) tag created. 
-  - If you have questions on this step, please view our eLearning library: https://ewon.biz/e-learning/library/flexy/local-data-acquisition. 
-  - Ideally, this tag will change in value so we can see the changes in the final step.
+    - If you have questions on this step, please view our eLearning library: https://ewon.biz/e-learning/library/flexy/local-data-acquisition. 
+    - Ideally, this tag will change in value so we can see the changes in the final step.
 3. Navigate to the BASIC IDE by clicking on Setup -> BASIC IDE
 4. Copy the code in [AzureMQTT.bas](https://github.com/vivekmano/flexy205-azure/blob/master/AzureMQTT.bas) into the “Init Section”. Find your connection string from step 7 above and input the following information:
-  * DeviceID (what we named our device, I used MyFlexy205-SAS)
-  * IoTHubName
-  * SASToken
+    * DeviceID (what we named our device, I used MyFlexy205-SAS)
+    * IoTHubName
+    * SASToken
 5. Click File -> Save and then run the script (Run -> Run)
-  * In the console window you should be able to see PUBLISH. If not, check your steps again.
+    * In the console window you should be able to see PUBLISH. If not, check your steps again.
 6. Open Device Explorer, click on the Data tab, and click Monitor
 
 **Congratulations! You are now sharing data with Azure IoT Hub.**
