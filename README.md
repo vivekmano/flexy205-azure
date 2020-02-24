@@ -1,4 +1,4 @@
-# Send data from an Ewon Flexy to Microsoft Azure IoT Hub via MQTT
+# Ewon Flexy to Microsoft Azure IoT Hub via MQTT
 ===
 ---
 
@@ -72,7 +72,7 @@ For this section, we are going to follow the recommendations given by Microsoft 
   a. If you have questions on this step, please view our eLearning library: https://ewon.biz/e-learning/library/flexy/local-data-acquisition. 
   b. Ideally, this tag will change in value so we can see the changes in the final step.
 3. Navigate to the BASIC IDE by clicking on Setup -> BASIC IDE
-4. Copy the code in AzureMQTT.bas into the “Init Section”. Find your connection string from step 7 above and input the following information:
+4. Copy the code in [AzureMQTT.bas](https://github.com/vivekmano/flexy205-azure/blob/master/AzureMQTT.bas) into the “Init Section”. Find your connection string from step 7 above and input the following information:
   a. DeviceID (what we named our device, I used MyFlexy205-SAS)
   b. IoTHubName
   c. SASToken
