@@ -40,6 +40,7 @@ You should have the following items ready before beginning the process:
 5. Finalize and confirm!
 
 Next, go to your IoT Hub
+
 6. Click “IoT Device”
 7. Click “New”
 8. Create your Device
