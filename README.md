@@ -1,5 +1,4 @@
-# Send data from an Ewon Flexy to Microsoft Azure IoT Hub
-Getting started guide for Ewon Flexy with Microsoft Azure IoT Hub (via MQTT)
+# Send data from an Ewon Flexy to Microsoft Azure IoT Hub via MQTT
 ===
 ---
 
@@ -7,9 +6,8 @@ Getting started guide for Ewon Flexy with Microsoft Azure IoT Hub (via MQTT)
 
 -   [Introduction](#Introduction)
 -   [Step 1: Prerequisites](#Prerequisites)
--   [Step 2: Prepare your Device](#PrepareDevice)
--   [Step 3: Build and Run the Sample](#Build)
--   [Tips](#tips)
+-   [Step 2: Create an Azure IoT Hub and collect Azure IoT Hub connectivity parameters](#IoTHub)
+-   [Step 3: Set up Ewon Flexy for MQTT communication with Azure IoT Hub](#Flexy)
 -   [Next Steps](#NextSteps)
 
 <a name="Introduction"></a>
@@ -27,157 +25,192 @@ This document describes how to connect an Ewon Flexy device to Microsoft Azure I
 
 You should have the following items ready before beginning the process:
 
--   Ewon Flexy device, minimum FW 14.0s0
--   Microsoft Device Explorer
-[Prepare your development environment][setup-devbox-linux]
--   [Setup your IoT hub][lnk-setup-iot-hub]
--   [Provision your device and get its credentials][lnk-manage-iot-hub]
--   {enter your device name here} device.
--   {{Please specify if any other software(s) or hardware(s) are required.}}
+1. Ewon Flexy device, minimum FW 14.0s0
+2. Microsoft Azure Portal account: https://azure.microsoft.com/en-us/features/azure-portal/
+3. Ewon Flexy device (purchase one here: https://www.ewon.biz/contact/find-distributor)
+4. DigiCert Baltimore Certificate: https://github.com/vivekmano/flexy205-azure/blob/master/BaltimoreCyberTrustRoot.pem
+5. Microsoft DeviceExplorer: https://github.com/Azure/azure-iot-sdk-csharp/releases/download/2019-1-4/SetupDeviceExplorer.msi
 
-<a name="PrepareDevice"></a>
-# Step 2: Prepare your Device
--   {{Write down the instructions required to setup, configure and connect your device. Please use external links when possible pointing to your own page with device preparation steps.}}
+<a name="IoTHub"></a>
+# Step 2: Create an Azure IoT Hub and collect Azure IoT Hub connectivity parameters
+1. Log in to the Azure Portal with your account
+2. Create a new resource of type “IoT Hub”
+3. Create the IoT Hub
+4. Choose (or create a new) resource group, name your IoT Hub (REMEMBER THIS!), and check the selection.
+5. Finalize and confirm!
 
-<a name="Build"></a>
-# Step 3: Build and Run the sample
+Next, go to your IoT Hub
+6. Click “IoT Device”
+7. Click “New”
+8. Create your Device
+9. Enter in a device name (e.g. MyFlexy205-SAS, REMEMBER THIS!)
+10. Choose whether SAS Token.
+11. Click “Save”
 
-## 3.1 Load the Azure IoT bits and prerequisites on device
+Next we're going to COLLECT CONNECTIVITY PARAMETERS
 
--   Open a PuTTY session and connect to the device.
+12. Under “Settings”, click “Shared Access Policies”
+13. Click “iothubowner”
+14. Next to “Connection String - primary key” click the “copy to clipboard” icon and save this string in a safe place. Your string should look something like: HostName=FlexyStepByStepGuide.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=blahblahblahblahblahblah= 
 
--   Install the prerequisite packages by issuing the following commands from the command line on the device. Choose your commands based on the OS running on your device.
+That’s all we need from Azure! Let’s generate your SAS Token.
 
-    **Debian or Ubuntu**
+15. Open up Device Explorer and paste your Connection String, click Update, then click Generate SAS.
+16. The three key pieces of information we need to keep handy are:
+- Device Name (also known as DeviceId)
+- Host Name (also known as IoTHubName)
+- SAS Token (what we just generated in Step 9)
 
-        sudo apt-get update
 
-        sudo apt-get install -y curl uuid-dev libcurl4-openssl-dev build-essential cmake git
+<a name="Flexy"></a>
+# Step 3: Set up Ewon Flexy for MQTT communication with Azure IoT Hub
+For this section, we are going to follow the recommendations given by Microsoft here: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-mqtt-support#using-the-mqtt-protocol-directly-as-a-device
 
-    **Fedora**
+1. Load the DigiCert Baltimore PEM certificate on to your Flexy via FTP into the /usr folder
+  a. If you have questions on this step, please refer to Step 1 in the following knowledge-base article: https://hmsnetworks.blob.core.windows.net/www/docs/librariesprovider10/downloads-monitored/manuals/knowledge-base/kb-0020-00-en-configure-your-ewon-using-ftp.pdf?sfvrsn=32ef56d7_6
+2. Log in to your Flexy device and ensure that you have at least one (1) tag created. 
+  a. If you have questions on this step, please view our eLearning library: https://ewon.biz/e-learning/library/flexy/local-data-acquisition. 
+  b. Ideally, this tag will change in value so we can see the changes in the final step.
+3. Navigate to the BASIC IDE by clicking on Setup -> BASIC IDE
+4. Copy the following code into the “Init Section”. Find your connection string from step 7 above and input the following information:
+  a. DeviceID (what we named our device, I used MyFlexy205-SAS)
+  b. IoTHubName
+  c. SASToken
 
-        sudo dnf check-update -y
+**Code Block**
+**----------**
+`DeviceId$="flexy205"
+IotHubName$ ="FlexyCert"
+SASToken$="SharedAccessSignature sr=FlexyCert.azure-devices.net&sig=cgNQkdAdyxNFofwwZZlCPLVCA2D20sRJ8JB88981K74%3D&se=1612470571&skn=iothubowner"
+Changepushtime% = 2 // Change Push Time
+Fullpushtime% = 20// Full Push Time
+configfile$="Azureiot_parameters.txt"// Name of the configuration file
+GROUPA% = 1
+GROUPB% = 1
+GROUPC% = 1
+GROUPD% = 1
+NB%= GETSYS PRG,"NBTAGS" 
+DIM a(NB%,2)
 
-        sudo dnf install uuid-devel libcurl-devel openssl-devel gcc-c++ make cmake git
+MQTT "Open",DeviceId$,IotHubName$ + ".azure-devices.net"
+Mqtt "SetParam","Port","8883"
+MQTT "setparam", "log", "1"
+MQTT "setparam", "keepalive", "20"
+MQTT "setparam", "TLSVERSION", "tlsv1.2"
+MQTT "setparam", "PROTOCOLVERSION", "3.1.1"
+MQTT "setparam", "cafile","/usr/BaltimoreCyberTrustRoot.pem"
+//MQTT "setparam", "CertFile","/usr/"+DeviceId$+".crt"
+//MQTT "setparam", "KeyFile","/usr/"+DeviceId$+".key"
+Mqtt "SetParam","Username",IotHubName$+ ".azure-devices.net/"+DeviceId$+"/api-version=2018-06-30"
+//Mqtt "SetParam","Password","HostName="+IotHubName$+";DeviceID="+DeviceId$+";x509=true"
+Mqtt "SetParam","Password",SASToken$
+Mqtt "Connect"
 
-    **Any Other Linux OS**
-
-        Use equivalent commands on the target OS
-
-    ***Note:*** *This setup process requires cmake version 2.8.12 or higher.* 
+ONMQTTSTATUS "GOTO IsConnected"
+End
+//a = table with 2 columns : one with the negative indice of the tag and the second one with 1 if the values of the tag change or 0 otherwise
+IsConnected:
+FOR i% = 0 TO NB%-1
+k%=i%+1
+SETSYS Tag, "load",-i%
+a(k%,1)=-i%
+a(k%,2) = 0
+        GroupA$= GETSYS TAG,"IVGROUPA"
+        GroupB$= GETSYS TAG,"IVGROUPB"
+        GroupC$= GETSYS TAG,"IVGROUPC"
+        GroupD$= GETSYS TAG,"IVGROUPD"
+        IF  GroupA$ = "1" And GROUPA%= 1  THEN 
+          Onchange -i%, "a("+ STR$ k%+",2)= 1" // 1 si la valeur change
+        ENDIF 
+        IF GroupB$ = "1" And GROUPB%= 1 THEN
+         Onchange -i%, "a("+ STR$ k%+",2)= 1"
+        ENDIF
+        IF GroupC$ = "1" And GROUPC%= 1 THEN
+         Onchange -i%, "a("+ STR$ k%+",2)= 1"
+        ENDIF
+        IF GroupD$ = "1" And GROUPD%= 1THEN
+         Onchange -i%, "a("+ STR$ k%+",2)= 1"
+        ENDIF
+    Next i% 
+    TSET 2,Changepushtime%
+    Ontimer 2, "goto MqttPublishChangedValue"
     
-    *You can verify the current version installed in your environment using the  following command:*
-
-        cmake --version
-
-    *This library also requires gcc version 4.9 or higher. You can verify the current version installed in your environment using the following command:*
+    Tset 1,Fullpushtime%
+    Ontimer 1,"goto MqttPublishAllValue"   
     
-        gcc --version 
-
-    *For information about how to upgrade your version of gcc on Ubuntu 14.04, see <http://askubuntu.com/questions/466651/how-do-i-use-the-latest-gcc-4-9-on-ubuntu-14-04>.*
+    Goto "MqttPublishAllValue"
+END
+Function GetTime$()
+ $a$ = Time$
+ $GetTime$ = $a$(7 To 10) + "-" + $a$(4 To 5) + "-" + $a$(1 To 2) + " " + $a$(12 To 13)+":"+$a$(15 To 16)+":"+$a$(18 To 19)
+EndFn
+//Publish just the changed tags
+MqttPublishChangedValue: 
+testtag@ = testtag@+1
+counter = 0
+json$ =         '{'
+FOR r% = 1 TO NB% 
+  IF a( r%,2) = 1 THEN
+    a(r%,2) = 0
+    negIndex% = a(r%,1)
+    SETSYS Tag, "LOAD", negIndex%
+    name$= GETSYS Tag, "name"
+    json$ = json$ + '"' + name$+ '":"'+STR$ GETIO name$ + '",'
+    counter= counter+1
+  ENDIF
+NEXT r%
+json$ = json$ +    '"time": "'+@GetTime$()+'"'
+json$ = json$ +    '}'
+IF counter > 0 THEN
+  MQTT "PUBLISH","devices/"+DeviceId$+"/messages/events/",json$, 1, 0
+  PRINT "Changes detected -> Publish"
+  
+ELSE
+  PRINT "No change detected!"
+ENDIF
+END
     
--   Download the SDK to the board by issuing the following command in PuTTY:
-
-        git clone --recursive https://github.com/Azure/azure-iot-sdk-c.git
-
--   Verify that you now have a copy of the source code under the
-    directory ~/azure-iot-sdk-c.
-
-<a name="Step-3-2-Build"></a>
-## 3.2 Build the samples
-
-There are two samples one for sending messages to IoT Hub and another for receiving messages from IoT Hub. Both samples supports different protocols. You can make modification to the samples with your choice of protocol before building the samples. By default the samples will build for AMQP protocol.  Follow the below instructions to edit the samples before building: 
+//publish all tags
+MqttPublishAllValue:
+json$ =         '{'
+    FOR i% = 0 TO NB% -1
+        SETSYS Tag, "load",-i%
+        i$= GETSYS TAG,"Name"
+        GroupA$= GETSYS TAG,"IVGROUPA"
+        GroupB$= GETSYS TAG,"IVGROUPB"
+        GroupC$= GETSYS TAG,"IVGROUPC"
+        GroupD$= GETSYS TAG,"IVGROUPD"
+        IF  GroupA$ = "1" And GROUPA%= 1  THEN 
+        json$ = json$ + '"' + i$+ '":"'+STR$ GETIO i$ + '",'
+        ENDIF 
+        IF GroupB$ = "1" And GROUPB%= 1 THEN
+        json$ = json$ + '"' + i$+ '":"'+STR$ GETIO i$ + '",'
+        ENDIF
+        IF GroupC$ = "1" And GROUPC%= 1 THEN
+        json$ = json$ + '"' + i$+ '":"'+STR$ GETIO i$ + '",'
+        ENDIF
+        IF GroupD$ = "1" And GROUPD%= 1THEN
+        json$ = json$ + '"' + i$+ '":"'+STR$ GETIO i$ + '",'
+        ENDIF
+    Next i%    
+json$ = json$ +    '"time": "'+@GetTime$()+'"'
+json$ = json$ +         '}'
     
-### 3.2.1 Send Telemetry to IoT Hub Sample:
+   STATUS% = MQTT("STATUS")
+   
+   //Is Connected
+   If (STATUS% = 5) Then
+     Print "PUBLISH: " + json$ 
+     MQTT "PUBLISH","devices/"+DeviceId$+"/messages/events/",json$, 1, 0
+   Else
+     Print "Not connected"
+   Endif
+End`
+**----------**
+**End Code Block**
 
-1.  Open the telemetry sample file in a text editor
+5. Click File -> Save and then run the script (Run -> Run)
+  a. In the console window you should be able to see PUBLISH. If not, check your steps again.
+6. Open Device Explorer, click on the Data tab, and click Monitor
 
-		nano azure-iot-sdk-c/iothub_client/samples/iothub_ll_telemetry_sample/iothub_ll_telemetry_sample.c     
-
-2. Find the following placeholder for IoT connection string:
-
-        static const char* connectionString = "[device connection string]";
-
-3. Replace the above placeholder with device connection string.
-    
-4. Find the following place holder for editing protocol:
-
-          // Select the Protocol to use with the connection
-		#ifdef USE_AMQP
-		    //protocol = AMQP_Protocol_over_WebSocketsTls;
-		    protocol = AMQP_Protocol;
-		#endif
-		#ifdef USE_MQTT
-		    //protocol = MQTT_Protocol;
-		    //protocol = MQTT_WebSocket_Protocol;
-		#endif
-		#ifdef USE_HTTP
-		    //protocol = HTTP_Protocol;
-		#endif
-	
-5. Please uncomment the protocol that you would like to test with and comment other protocols. If testing for multiple protocols, please repeat above step for each protocol. 
-
-6. Save your changes by pressing Ctrl+O and when nano prompts you to save it as the same file, just press ENTER.
-
-7. Press Ctrl+X to exit nano.
-
-### 3.2.1 Send message from IoT Hub to Device Sample:
-
-1. Open the telemetry sample file in a text editor
-
-	 	nano azure-iot-sdk-c/iothub_client/samples/iothub_ll_c2d_sample/iothub_ll_c2d_sample.c
-
-2. Follow same steps 1-7 as above to edit this sample.
-
-### 3.2.1 Build the samples:
-
--   Build the SDK using following command. If you are facing any issues during build.
-
-        sudo ./azure-iot-sdk-c/build_all/linux/build.sh | tee LogFile.txt
-    
-    ***Note:*** *LogFile.txt in above command should be replaced with a file name where build output will be written.*
-    
-    *build.sh creates a folder called "cmake" under "~/azure-iot-sdk-c/". Inside "cmake" are all the results of the compilation of the complete software.*
-
-
-<a name="Step-3-3-Run"></a>
-## 3.3 Run and Validate the Samples
-
-In this section you will run the Azure IoT client SDK samples to validate
-communication between your device and Azure IoT Hub. You will send messages to the Azure IoT Hub service and validate that IoT Hub has successfully receive the data. You will also monitor any messages send from the Azure IoT Hub to client.
-
-### 3.3.1 Send Device Events to IOT Hub:
-
--   Run the sample by issuing following command.    
-
-		azure-iot-sdk-c/cmake/iotsdk_linux/iothub_client/samples/iothub_ll_telemetry_sample/iothub_ll_telemetry_sample
-
-
-### 3.3.2 Receive messages from IoT Hub
-
--   Run the sample by issuing following command.
-
-		azure-iot-sdk-c/cmake/iotsdk_linux/iothub_client/samples/iothub_ll_c2d_sample/iothub_ll_c2d_sample
-		
-
-<a name="NextSteps"></a>
-# Next Steps
-
-You have now learned how to run a sample application that collects sensor data and sends it to your IoT hub. To explore how to store, analyze and visualize the data from this application in Azure using a variety of different services, please click on the following lessons:
-
--   [Manage cloud device messaging with iothub-explorer]
--   [Save IoT Hub messages to Azure data storage]
--   [Use Power BI to visualize real-time sensor data from Azure IoT Hub]
--   [Use Azure Web Apps to visualize real-time sensor data from Azure IoT Hub]
--   [Weather forecast using the sensor data from your IoT hub in Azure Machine Learning]
--   [Remote monitoring and notifications with Logic Apps]   
-
-[Manage cloud device messaging with iothub-explorer]: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-explorer-cloud-device-messaging
-[Save IoT Hub messages to Azure data storage]: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-store-data-in-azure-table-storage
-[Use Power BI to visualize real-time sensor data from Azure IoT Hub]: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-live-data-visualization-in-power-bi
-[Use Azure Web Apps to visualize real-time sensor data from Azure IoT Hub]: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-live-data-visualization-in-web-apps
-[Weather forecast using the sensor data from your IoT hub in Azure Machine Learning]: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-weather-forecast-machine-learning
-[Remote monitoring and notifications with Logic Apps]: https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-monitoring-notifications-with-azure-logic-apps
-[setup-devbox-linux]: https://github.com/Azure/azure-iot-sdk-c/blob/master/doc/devbox_setup.md
-[lnk-setup-iot-hub]: ../../setup_iothub.md
-[lnk-manage-iot-hub]: ../../manage_iot_hub.md
+**Congratulations! You are now sharing data with Azure IoT Hub.**
