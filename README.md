@@ -64,7 +64,7 @@ You should have the following items ready before beginning the process:
 9. Under “Settings"
     1. Click *Shared Access Policies*
     2. Click *iothubowner*
-    3. Copy your “Connection String - primary key” by clicking the *copy to clipboard* icon
+    3. Copy your “Connection String - primary key” by clicking the *Copy to clipboard* icon
     ![Getting the Connection String](https://user-images.githubusercontent.com/11340557/75224303-8a061c80-57a8-11ea-9845-248008071474.png)
     * *Your string should look something like:* `HostName=FlexyStepByStepGuide.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=blahblahblahblahblahblah=`
     
@@ -102,9 +102,9 @@ For this section, we are going to follow the recommendations given by Microsoft 
 <a name="FlexyScript"></a>
 # Appendix A - BASIC Script for Flexy
 ```BASIC
-DeviceId$="flexy205"
-IotHubName$ ="FlexyCert"
-SASToken$="SharedAccessSignature sr=FlexyCert.azure-devices.net&sig=cgNQkdAdyxNFofwwZZlCPLVCA2D20sRJ8JB88981K74%3D&se=1612470571&skn=iothubowner"
+DeviceId$="MyFlexy205-SAS" //put in your own DeviceId here within the quotes
+IotHubName$ ="FlexyStepByStepGuide" //put in your own IoT Hub Name here within the quotes
+SASToken$="" //put in your SAS Token here within the quotes, usually starts with SharedAccessSignature
 Changepushtime% = 2 // Change Push Time
 Fullpushtime% = 20// Full Push Time
 configfile$="Azureiot_parameters.txt"// Name of the configuration file
