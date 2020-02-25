@@ -29,16 +29,16 @@ You should have the following items ready before beginning the process:
 <a name="IoTHub"></a>
 # Step 2: Create an Azure IoT Hub and collect Azure IoT Hub connectivity parameters
 1. Log in to the Azure Portal with your account, go to IoT Hub
-    * ![Go to IoT Hub](https://user-images.githubusercontent.com/11340557/75222829-5fff2b00-57a5-11ea-9dad-6d573debb2c8.png)
+![Go to IoT Hub](https://user-images.githubusercontent.com/11340557/75222829-5fff2b00-57a5-11ea-9dad-6d573debb2c8.png)
 2. Create a new resource of type “IoT Hub”
-![Add New IoT Hub](https://user-images.githubusercontent.com/11340557/75219822-2545c480-579e-11ea-96bd-67f73e6db6b7.png)
+![Add New IoT Hub](https://user-images.githubusercontent.com/11340557/75222919-9f2d7c00-57a5-11ea-92cb-f7e3552e79d5.png)
 3. Create the IoT Hub
-![IoT Hub Options](https://user-images.githubusercontent.com/11340557/75219827-2840b500-579e-11ea-8642-6db33d8cf3f6.png)
     1. Choose Free Trial
     2. Assign a Resource Group, or create a new one
     3. Assign your region
     4. Create an IoT Hub name and WRITE IT DOWN!
     5. Click "Review and Create"
+    ![IoT Hub Options](https://user-images.githubusercontent.com/11340557/75223147-20850e80-57a6-11ea-9d59-41a0917f764b.png)
 4. Click "Create" to finalize and confirm!
 ![Finalize IoT Hub](https://user-images.githubusercontent.com/11340557/75220511-e31d8280-579f-11ea-8439-025b3af5d5f3.png)
 
