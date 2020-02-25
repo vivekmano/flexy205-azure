@@ -45,7 +45,7 @@ You should have the following items ready before beginning the process:
 
 ### Next, go to your IoT Hub
 
-5. Under the "Explorers" sub-sction, click on *IoT Device*
+5. Under the "Explorers" sub-section, click on *IoT Device*
 ![Click IoT Device](https://user-images.githubusercontent.com/11340557/75223455-c6d11400-57a6-11ea-92ab-5cac8f30c26b.png)
 6. Click *New*
 
@@ -59,10 +59,10 @@ You should have the following items ready before beginning the process:
 
 ![Confirmation device created](https://user-images.githubusercontent.com/11340557/75223888-b0778800-57a7-11ea-83de-fa763706ab44.png)
 
-### Next we're going to collect the Azure IoT connectivity parameters
+### Next, we're going to collect the Azure IoT connectivity parameters
 
 9. Under “Settings"
-    1. Cick *Shared Access Policies*
+    1. Click *Shared Access Policies*
     2. Click *iothubowner*
     3. Copy your “Connection String - primary key” by clicking the *copy to clipboard* icon
     ![Getting the Connection String](https://user-images.githubusercontent.com/11340557/75224303-8a061c80-57a8-11ea-9845-248008071474.png)
