@@ -38,29 +38,35 @@ You should have the following items ready before beginning the process:
     3. Assign your region
     4. Create an IoT Hub name and WRITE IT DOWN!
     5. Click "Review and Create"
-    ![IoT Hub Options](https://user-images.githubusercontent.com/11340557/75223147-20850e80-57a6-11ea-9d59-41a0917f764b.png)
+    
+![IoT Hub Options](https://user-images.githubusercontent.com/11340557/75223147-20850e80-57a6-11ea-9d59-41a0917f764b.png)
+
 4. Click "Create" to finalize and confirm!
-![Finalize IoT Hub](https://user-images.githubusercontent.com/11340557/75220511-e31d8280-579f-11ea-8439-025b3af5d5f3.png)
 
 Next, go to your IoT Hub
 
-6. Under the "Explorers" sub-sction, click on “IoT Device”
-![Click IoT Device](https://user-images.githubusercontent.com/11340557/75220572-05af9b80-57a0-11ea-9dc4-0dc51dbc09c2.png)
-7. Click “New”
-![Click New](https://user-images.githubusercontent.com/11340557/75220656-31cb1c80-57a0-11ea-9ac6-0dcc68e05309.png)
+5. Under the "Explorers" sub-sction, click on “IoT Device”
+![Click IoT Device](https://user-images.githubusercontent.com/11340557/75223455-c6d11400-57a6-11ea-92ab-5cac8f30c26b.png)
+6. Click “New”
+![Click New](https://user-images.githubusercontent.com/11340557/75223531-ecf6b400-57a6-11ea-8415-2b962d2f7866.png)
+7. Create your Device and:
+    1. Enter in a device name (e.g. MyFlexy205-SAS, REMEMBER THIS!)
+    2. Choose "SAS Token"
+    3. Click Save
+![Create Device](https://user-images.githubusercontent.com/11340557/75223731-6393b180-57a7-11ea-9796-55b44ea58404.png)
+8. Your device has been created! 
+![Confirmation device created](https://user-images.githubusercontent.com/11340557/75223888-b0778800-57a7-11ea-83de-fa763706ab44.png)
 
-8. Create your Device
-9. Enter in a device name (e.g. MyFlexy205-SAS, REMEMBER THIS!)
-10. Choose whether SAS Token.
-11. Click “Save”
+##Next we're going to COLLECT CONNECTIVITY PARAMETERS
 
-Next we're going to COLLECT CONNECTIVITY PARAMETERS
-
-12. Under “Settings”, click “Shared Access Policies”
-13. Click “iothubowner”
-14. Next to “Connection String - primary key” click the “copy to clipboard” icon and save this string in a safe place. 
-    - Your string should look something like: HostName=FlexyStepByStepGuide.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=blahblahblahblahblahblah= 
-
+9. Under “Settings"
+    1. Cick “Shared Access Policies”
+    2. Click "iothubowner"
+    3. Copy your “Connection String - primary key” by clicking the “copy to clipboard” icon
+    * Save this string in a safe place!
+    * Your string should look something like: HostName=FlexyStepByStepGuide.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=blahblahblahblahblahblah= 
+![Getting the Connection String](https://user-images.githubusercontent.com/11340557/75224303-8a061c80-57a8-11ea-9845-248008071474.png)
+    
 That’s all we need from Azure! Let’s generate your SAS Token.
 
 15. Open up Device Explorer and paste your Connection String, click Update, then click Generate SAS.
