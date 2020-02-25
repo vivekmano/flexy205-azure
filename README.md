@@ -38,6 +38,7 @@ You should have the following items ready before beginning the process:
     3. Assign your region
     4. Create an IoT Hub name and WRITE IT DOWN!
     5. Click *Review and Create*
+    
     ![IoT Hub Options](https://user-images.githubusercontent.com/11340557/75223147-20850e80-57a6-11ea-9d59-41a0917f764b.png)
 
 4. Click "Create" to finalize and confirm!
@@ -52,6 +53,7 @@ You should have the following items ready before beginning the process:
     1. Enter in a device name (e.g. MyFlexy205-SAS, REMEMBER THIS!)
     2. Choose "SAS Token"
     3. Click *Save*
+    
     ![Create Device](https://user-images.githubusercontent.com/11340557/75223731-6393b180-57a7-11ea-9796-55b44ea58404.png)
 8. Your device has been created! 
 
@@ -64,7 +66,7 @@ You should have the following items ready before beginning the process:
     2. Click *iothubowner*
     3. Copy your “Connection String - primary key” by clicking the *copy to clipboard* icon
     ![Getting the Connection String](https://user-images.githubusercontent.com/11340557/75224303-8a061c80-57a8-11ea-9845-248008071474.png)
-    * *Your string should look something like: `HostName=FlexyStepByStepGuide.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=blahblahblahblahblahblah=`* 
+    * *Your string should look something like:* `HostName=FlexyStepByStepGuide.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=blahblahblahblahblahblah=`
     
 ### That’s all we need from Azure! Let’s generate your SAS Token.
 
