@@ -1,9 +1,4 @@
 # Ewon Flexy to Microsoft Azure IoT Hub via MQTT
-===
----
-
-# Table of Contents
-
 -   [Introduction](#Introduction)
 -   [Step 1: Prerequisites](#Prerequisites)
 -   [Step 2: Create an Azure IoT Hub and collect Azure IoT Hub connectivity parameters](#IoTHub)
@@ -33,17 +28,27 @@ You should have the following items ready before beginning the process:
 
 <a name="IoTHub"></a>
 # Step 2: Create an Azure IoT Hub and collect Azure IoT Hub connectivity parameters
-1. Log in to the Azure Portal with your account
+1. Log in to the Azure Portal with your account, go to IoT Hub
+![Go to IoT Hub](https://user-images.githubusercontent.com/11340557/75219816-20811080-579e-11ea-8575-328970e04007.png)
 2. Create a new resource of type “IoT Hub”
-![Create IoT Hub](https://user-images.githubusercontent.com/11340557/75219816-20811080-579e-11ea-8575-328970e04007.png)
+![Add New IoT Hub](https://user-images.githubusercontent.com/11340557/75219822-2545c480-579e-11ea-96bd-67f73e6db6b7.png)
 3. Create the IoT Hub
-4. Choose (or create a new) resource group, name your IoT Hub (REMEMBER THIS!), and check the selection.
-5. Finalize and confirm!
+![IoT Hub Options](https://user-images.githubusercontent.com/11340557/75219827-2840b500-579e-11ea-8642-6db33d8cf3f6.png)
+    1. Choose Free Trial
+    2. Assign a Resource Group, or create a new one
+    3. Assign your region
+    4. Create an IoT Hub name and WRITE IT DOWN!
+    5. Click "Review and Create"
+4. Click "Create" to finalize and confirm!
+![Finalize IoT Hub](https://user-images.githubusercontent.com/11340557/75220511-e31d8280-579f-11ea-8439-025b3af5d5f3.png)
 
 Next, go to your IoT Hub
 
-6. Click “IoT Device”
+6. Under the "Explorers" sub-sction, click on “IoT Device”
+![Click IoT Device](https://user-images.githubusercontent.com/11340557/75220572-05af9b80-57a0-11ea-9dc4-0dc51dbc09c2.png)
 7. Click “New”
+![Click New](https://user-images.githubusercontent.com/11340557/75220656-31cb1c80-57a0-11ea-9ac6-0dcc68e05309.png)
+
 8. Create your Device
 9. Enter in a device name (e.g. MyFlexy205-SAS, REMEMBER THIS!)
 10. Choose whether SAS Token.
