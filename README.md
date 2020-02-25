@@ -48,7 +48,6 @@ You should have the following items ready before beginning the process:
 5. Under the "Explorers" sub-sction, click on *IoT Device*
 ![Click IoT Device](https://user-images.githubusercontent.com/11340557/75223455-c6d11400-57a6-11ea-92ab-5cac8f30c26b.png)
 6. Click *New*
-![Click New](https://user-images.githubusercontent.com/11340557/75223531-ecf6b400-57a6-11ea-8415-2b962d2f7866.png)
 
 7. Create your Device and:
     1. Enter in a device name (e.g. MyFlexy205-SAS, REMEMBER THIS!)
@@ -72,7 +71,7 @@ You should have the following items ready before beginning the process:
 ### That’s all we need from Azure! Let’s generate your SAS Token.
 
 15. Open up Device Explorer and paste your Connection String, click *Update*, then click *Generate SAS*.
-![Generate SAS Token](https://user-images.githubusercontent.com/11340557/75225350-b7ec6080-57aa-11ea-9e0a-52813324a2ba.png)
+![Generate SAS Token](https://user-images.githubusercontent.com/11340557/75226028-ed457e00-57ab-11ea-9f7e-dbb8e340a97f.png)
 
 16. The three key pieces of information we need to keep handy are:
     - Device Name (also known as DeviceId)
