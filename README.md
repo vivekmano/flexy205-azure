@@ -48,6 +48,7 @@ You should have the following items ready before beginning the process:
 5. Under the "Explorers" sub-sction, click on *IoT Device*
 ![Click IoT Device](https://user-images.githubusercontent.com/11340557/75223455-c6d11400-57a6-11ea-92ab-5cac8f30c26b.png)
 6. Click *New*
+
 ![Click New](https://user-images.githubusercontent.com/11340557/75223531-ecf6b400-57a6-11ea-8415-2b962d2f7866.png)
 7. Create your Device and:
     1. Enter in a device name (e.g. MyFlexy205-SAS, REMEMBER THIS!)
