@@ -70,13 +70,13 @@ You should have the following items ready before beginning the process:
     
 ### That’s all we need from Azure! Let’s generate your SAS Token.
 
-15. Open up Device Explorer and paste your Connection String, click *Update*, then click *Generate SAS*.
+10. Open up Device Explorer and paste your Connection String, click *Update*, then click *Generate SAS*.
 ![Generate SAS Token](https://user-images.githubusercontent.com/11340557/75226028-ed457e00-57ab-11ea-9f7e-dbb8e340a97f.png)
 
-16. The three key pieces of information we need to keep handy are:
+The three key pieces of information we need to keep handy are:
     - Device Name (also known as DeviceId)
     - Host Name (also known as IoTHubName)
-    - SAS Token (what we just generated in Step 9)
+    - SAS Token (what we just generated in Device Explorer)
 
 <a name="Flexy"></a>
 # Step 3: Set up Ewon Flexy for MQTT communication with Azure IoT Hub
