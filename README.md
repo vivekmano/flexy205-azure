@@ -104,9 +104,9 @@ For this section, we are going to follow the recommendations given by Microsoft 
 
 For the latest scripts, please check the following links:
 
-https://techforum.ewon.biz/thread-561.html  (SAS token)
-https://techforum.ewon.biz/thread-786.html (Certificate)
-https://techforum.ewon.biz/thread-939.html (Java ready-to-use connector)
+* https://techforum.ewon.biz/thread-561.html  (SAS token)
+* https://techforum.ewon.biz/thread-786.html (Certificate)
+* https://techforum.ewon.biz/thread-939.html (Java ready-to-use connector)
 
 
 ```BASIC
