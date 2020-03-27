@@ -101,6 +101,14 @@ For this section, we are going to follow the recommendations given by Microsoft 
 
 <a name="FlexyScript"></a>
 # Appendix A - BASIC Script for Flexy
+
+For the latest scripts, please check the following links:
+
+https://techforum.ewon.biz/thread-561.html  (SAS token)
+https://techforum.ewon.biz/thread-786.html (Certificate)
+https://techforum.ewon.biz/thread-939.html (Java ready-to-use connector)
+
+
 ```BASIC
 DeviceId$="MyFlexy205-SAS" //put in your own DeviceId here within the quotes
 IotHubName$ ="FlexyStepByStepGuide" //put in your own IoT Hub Name here within the quotes
